@@ -39,42 +39,42 @@ stages:
       size: 958
     params:
       params.yaml:
-        split.split_ratio: 0.3
+        split.split_ratio: 0.2
     outs:
     - path: data/stage3
-      md5: 09584810b3ab221bcb78e501bdd6d664.dir
+      md5: 0cf523af4acfd3dcc5e20793c607d293.dir
       size: 8497
       nfiles: 2
   train:
     cmd: python3 scripts/model_scripts/dt.py data/stage3/train.csv model.pkl
     deps:
     - path: data/stage3/train.csv
-      md5: 90c75afeaed4a45538809fe463af5717
-      size: 5948
+      md5: b8b7822cec4ab2a7257d3cef5a75c7e7
+      size: 6796
     - path: scripts/model_scripts/dt.py
       md5: 79dcfea9083ca61bd8c953bbd9488888
       size: 725
     params:
       params.yaml:
-        train.max_depth: 3
+        train.max_depth: 2
         train.seed: 42
     outs:
     - path: models/model.pkl
-      md5: 0aede0f0afe4d65669150a98a0dde827
-      size: 1929
+      md5: d762f17147f8fd4e5fba1ca2aa8f193e
+      size: 1417
   evaluate:
     cmd: python3 scripts/model_scripts/evaluate.py data/stage3/test.csv models/model.pkl
     deps:
     - path: data/stage3/test.csv
-      md5: 8ed6873564c4a12772eddeaa7e31119e
-      size: 2549
+      md5: aba9fbcc51027f1a7cb59e23e990762b
+      size: 1701
     - path: models/model.pkl
-      md5: 0aede0f0afe4d65669150a98a0dde827
-      size: 1929
+      md5: d762f17147f8fd4e5fba1ca2aa8f193e
+      size: 1417
     - path: scripts/model_scripts/evaluate.py
       md5: 63abba25d9fa0daab4db0d7ee2fecf22
       size: 570
     outs:
     - path: evaluate/score.json
-      md5: 8bd56d356a895b15d9661f35efbc2c81
-      size: 29
+      md5: 672fedf9a94383e23b53905d8320da10
+      size: 28
