@@ -20,12 +20,13 @@ p_seed = params["seed"]
 p_max_depth = params["max_depth"]
 
 df = pd.read_csv(f_input, header=None)
-X = df.iloc[:,[1,2,3]]
-y = df.iloc[:,0]
+X = df.iloc[:,[0,1,2]]
+y = df.iloc[:,3]
 
-clf = DecisionTreeRegressor(max_depth=p_max_depth, random_state=p_seed)
-clf.fit(X, y)
+rgr = DecisionTreeRegressor(max_depth=p_max_depth, random_state=p_seed)
+rgr.fit(X, y)
 
 with open(f_output, "wb") as fd:
-    pickle.dump(clf, fd)
+    pickle.dump(rgr, fd)
+
 
